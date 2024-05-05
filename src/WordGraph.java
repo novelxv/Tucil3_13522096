@@ -1,11 +1,11 @@
 import java.util.*;
 
 public class WordGraph {
-    private Map<String, Set<String>> graph = new HashMap();
+    private Map<String, Set<String>> graph = new HashMap<>();
 
     /* Add a word to the graph */
     public void addWord(String word){
-        graph.putIfAbsent(word, new HashSet());
+        graph.putIfAbsent(word, new HashSet<String>());
     }
 
     /* Add an edge between two words */
@@ -17,5 +17,10 @@ public class WordGraph {
     /* Get the neighbors of a word */
     public Set<String> getNeighbors(String word){
         return graph.getOrDefault(word, Collections.emptySet());
+    }
+
+    /* Get all words in the graph */
+    public Set<String> getWords(){
+        return graph.keySet();
     }
 }
