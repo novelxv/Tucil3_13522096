@@ -3,6 +3,7 @@ import java.util.List;
 
 public class WordLadder {
     private WordGraph wordGraph = new WordGraph();
+    private Algorithm algorithm;
 
     /* Load words from a file */
     public void loadWords(String filename) throws IOException {
@@ -11,7 +12,6 @@ public class WordLadder {
             reader = new BufferedReader(new FileReader(filename));
             String line;
             while ((line = reader.readLine()) != null){
-                // System.out.println("Adding word: " + line); // debug
                 wordGraph.addWord(line);
             }
         } finally {
@@ -23,7 +23,6 @@ public class WordLadder {
         for (String word1 : wordGraph.getWords()){
             for (String word2 : wordGraph.getWords()){
                 if (differByOne(word1, word2)){
-                    // System.out.println("Adding edge between " + word1 + " and " + word2); // debug
                     wordGraph.addEdge(word1, word2);
                 }
             }
@@ -51,7 +50,6 @@ public class WordLadder {
 
     /* Solve the Word Ladder */
     public List<String> solve(String startWord, String endWord, int algorithmChoice){
-        Algorithm algorithm;
         switch (algorithmChoice){
             case 1:
                 algorithm = new UCS(wordGraph);
@@ -60,7 +58,7 @@ public class WordLadder {
                 algorithm = new GBFS(wordGraph);
                 break;
             case 3:
-                algorithm = new Astar(wordGraph);
+                algorithm = new AStar(wordGraph);
                 break;
             default:
                 throw new IllegalArgumentException("Invalid algorithm choice");
@@ -70,7 +68,7 @@ public class WordLadder {
     }
 
     /* Get the number of visited nodes */
-    public int getVisitedNodes(Algorithm algorithm){
+    public int getVisitedNodes(){
         return algorithm.getVisitedNodeCount();
     }
 }
