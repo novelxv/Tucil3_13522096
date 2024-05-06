@@ -1,25 +1,18 @@
-import java.util.Objects;
 public class Node {
     String word;
+    int cost;
+    int heuristic;
     int priority;
     int insertionOrder;
+    Node origin;
 
-    public Node(String word, int priority, int insertionOrder){
+    /* Constructor */
+    public Node(String word, int cost, int heuristic, int priority, int insertionOrder, Node origin){
         this.word = word;
+        this.cost = cost;
+        this.heuristic = heuristic;
         this.priority = priority;
         this.insertionOrder = insertionOrder;
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Node node = (Node) o;
-        return word.equals(node.word);
-    }
-
-    @Override
-    public int hashCode(){
-        return Objects.hash(word);
+        this.origin = origin;
     }
 }
