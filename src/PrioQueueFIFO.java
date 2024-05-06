@@ -17,6 +17,10 @@ public class PrioQueueFIFO {
         });
     }
 
+    public int getCurrentInsertionOrder(){
+        return insertionOrder;
+    }
+
     public void add(Node node){
         queue.add(new Node(node.word, node.priority, insertionOrder++));
     }
