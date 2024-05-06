@@ -1,3 +1,5 @@
+import java.util.Map; // debug
+
 public  class UCS extends Algorithm {
     public UCS(WordGraph graph){
         super(graph);
@@ -13,13 +15,22 @@ public  class UCS extends Algorithm {
     @Override
     protected void exploreNeighbors(Node current, String endWord){
         for (String neighbor : graph.getNeighbors(current.word)){
+            // System.out.println("Visiting neighbor: " + neighbor); // debug
             int newPriority = current.priority + 1;
             Node neighborNode = convertStringToNode(neighbor);
-            if (neighborNode == null || newPriority < origin.get(neighborNode).priority){
+            // Node originNode = origin.get(neighborNode);
+            // System.out.println(originNode.word); // debug
+            if (neighborNode == null){
                 int insertionOrder = frontier.getCurrentInsertionOrder();
                 Node newNode = new Node(neighbor, newPriority, insertionOrder);
                 frontier.add(newNode);
                 origin.put(newNode, current);
+                System.out.println(current.word); // debug
+                System.out.println(newNode.word); // debug
+                // debug print origin
+                // for (Map.Entry<Node, Node> entry : origin.entrySet()){
+                //     System.out.println("Origin: " + entry.getKey().word + " -> " + entry.getValue().word);
+                // }
             }
         }
     }

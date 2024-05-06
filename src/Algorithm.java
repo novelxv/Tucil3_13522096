@@ -20,6 +20,7 @@ public abstract class Algorithm {
         startSetup(startWord, endWord);
         while (!frontier.isEmpty()){
             Node current = frontier.poll();
+            System.out.println("Visiting: " + current.word); // debug
             if (current.word.equals(endWord)){
                 return buildPath(current);
             }
@@ -40,6 +41,10 @@ public abstract class Algorithm {
         Collections.reverse(path);
         return path;
     }
+
+    public int getVisitedNodeCount(){
+        return origin.size();
+    }   
 
     public Node convertStringToNode(String word){
         for (Map.Entry<Node, Node> entry : origin.entrySet()){
