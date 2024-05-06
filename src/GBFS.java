@@ -1,11 +1,12 @@
-public  class UCS extends Algorithm {
-    public UCS(WordGraph graph){
+public class GBFS extends Algorithm {
+    public GBFS(WordGraph graph){
         super(graph);
     }
 
     @Override
     protected void startSetup(String startWord, String endWord){
-        Node startNode = new Node(startWord, 0, 0);
+        int priority = AlgoUtils.calculateHeuristic(startWord, endWord);
+        Node startNode = new Node(startWord, priority, 0);
         frontier.add(startNode);
         origin.put(startNode, null);
     }
@@ -13,11 +14,11 @@ public  class UCS extends Algorithm {
     @Override
     protected void exploreNeighbors(Node current, String endWord){
         for (String neighbor : graph.getNeighbors(current.word)){
-            int newPriority = current.priority + 1;
+            int newPriority = AlgoUtils.calculateHeuristic(neighbor, endWord);
             Node neighborNode = convertStringToNode(neighbor);
-            if (neighborNode == null || newPriority < origin.get(neighborNode).priority){
+            if (neighborNode == null){
                 int insertionOrder = frontier.getCurrentInsertionOrder();
-                Node newNode = new Node(neighbor, newPriority, insertionOrder);
+                Node newNode = new Node(neighbor, newPriority, insertionOrder++);
                 frontier.add(newNode);
                 origin.put(newNode, current);
             }
