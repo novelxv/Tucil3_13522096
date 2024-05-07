@@ -56,7 +56,8 @@ For GUI
 
 ## Program Display
 
-![](assets/bezier-3.gif)
+![](assets/page1.png)
+![](assets/page2.png)
 
 ## Author Information
 | Name                    | NIM      |
