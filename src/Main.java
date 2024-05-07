@@ -5,6 +5,10 @@ public class Main {
     public static void main(String[] args){
         WordLadder wordLadder = new WordLadder();
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println("==========================================");
+        System.out.println("  Welcome to the Word Ladder Game Solver!");
+        System.out.println("==========================================");
         
         System.out.print("Enter the length of the words you want to play (2-15 words): ");
         int length = scanner.nextInt();
@@ -26,18 +30,18 @@ public class Main {
 
         // input start and end word
         System.out.print("Enter the start word: ");
-        String startWord = scanner.next();
+        String startWord = scanner.next().toUpperCase();
         // word length and existence validation
         while (startWord.length() != length || !wordLadder.getGraph().getWords().contains(startWord)){
             System.out.print("Invalid word. Please enter a word with " + length + " characters that is in the dictionary: ");
-            startWord = scanner.next();
+            startWord = scanner.next().toUpperCase();
         }
         System.out.print("Enter the end word: ");
-        String endWord = scanner.next();
+        String endWord = scanner.next().toUpperCase();
         // word length and existence validation
         while (endWord.length() != length || !wordLadder.getGraph().getWords().contains(endWord)){
             System.out.print("Invalid word. Please enter a word with " + length + " characters that is in the dictionary: ");
-            endWord = scanner.next();
+            endWord = scanner.next().toUpperCase();
         }
 
         // choose algorithm

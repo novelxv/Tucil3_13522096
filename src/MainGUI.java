@@ -79,8 +79,8 @@ public class MainGUI extends JFrame {
 
             wordLadder = new WordLadder();
             wordLadder.loadWords("src/data/dictionary_" + length + ".txt");
-            String startWord = startWordField.getText().trim();
-            String endWord = endWordField.getText().trim();
+            String startWord = startWordField.getText().trim().toUpperCase();
+            String endWord = endWordField.getText().trim().toUpperCase();
 
             if (startWord.length() != length || !wordLadder.getGraph().getWords().contains(startWord) ||
                 endWord.length() != length || !wordLadder.getGraph().getWords().contains(endWord)){
