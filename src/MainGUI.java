@@ -11,6 +11,12 @@ public class MainGUI extends JFrame {
     private JTextArea resultArea;
     private WordLadder wordLadder;
     private JButton loadButton, solveButton;
+    private Color darkColor = new Color(34, 34, 34); 
+    private Color neonCyan = new Color(0, 255, 255);
+    private Color neonPink = new Color(255, 16, 240);
+    private Color neonPurple = new Color(148, 0, 211);
+    private Color neonBlue = new Color(30, 144, 255);
+    private Color neonYellow = new Color(255, 255, 0);
 
     public MainGUI(){
         setTitle("Word Ladder Solver");
@@ -23,33 +29,35 @@ public class MainGUI extends JFrame {
 
     private void initUI(){
         // Panel for word length input
-        JPanel lengthPanel = new JPanel();
-        lengthPanel.add(new JLabel("Enter words' length (2-15):"));
-        lengthField = new JTextField(10);
+        JPanel lengthPanel = createStyledPanel();
+        lengthPanel.add(createStyledLabel("Enter words' length (2-15):", neonBlue));
+        lengthField = createStyledTextField(10, neonCyan);
         lengthPanel.add(lengthField);
-        loadButton = new JButton("Load Dictionary");
+        loadButton = createStyledButton("Load Dictionary", neonPurple);
         loadButton.addActionListener(this::loadDictionary);
         lengthPanel.add(loadButton);
 
         // Panel for the main solver
-        JPanel solverPanel = new JPanel(new BorderLayout());
+        JPanel solverPanel = createStyledPanel();
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        startWordField = new JTextField(10);
-        endWordField = new JTextField(10);
+        inputPanel.setBackground(darkColor);
+        startWordField = createStyledTextField(10, neonPink);
+        endWordField = createStyledTextField(10, neonPink);
         algorithmSelector = new JComboBox<>(new String[]{"Uniform Cost Search", "Greedy Best First Search", "A* Search"});
-        solveButton = new JButton("Solve");
+        styleComboBox(algorithmSelector, neonYellow);
+        solveButton = createStyledButton("Solve", neonYellow);
         solveButton.addActionListener(this::solveAction);
 
-        inputPanel.add(new JLabel("Start Word:"));
+        inputPanel.add(createStyledLabel("Start Word:", neonCyan));
         inputPanel.add(startWordField);
-        inputPanel.add(new JLabel("End Word:"));
+        inputPanel.add(createStyledLabel("End Word:", neonCyan));
         inputPanel.add(endWordField);
-        inputPanel.add(new JLabel("Select Algorithm:"));
+        inputPanel.add(createStyledLabel("Select Algorithm:", neonCyan));
         inputPanel.add(algorithmSelector);
         inputPanel.add(solveButton);
 
-        resultArea = new JTextArea(10, 30);
-        resultArea.setEditable(false);
+        resultArea = new JTextArea(25, 80);
+        styleTextArea(resultArea, neonPink);
         JScrollPane scrollPane = new JScrollPane(resultArea);
 
         solverPanel.add(inputPanel, BorderLayout.NORTH);
@@ -62,6 +70,43 @@ public class MainGUI extends JFrame {
 
         // Initially disable input fields and solve button
         toggleInputs(false);
+    }
+
+    private JPanel createStyledPanel(){
+        JPanel panel = new JPanel();
+        panel.setBackground(darkColor);
+        return panel;
+    }
+
+    private JLabel createStyledLabel(String text, Color textColor){
+        JLabel label = new JLabel(text);
+        label.setForeground(textColor);
+        return label;
+    }
+
+    private JTextField createStyledTextField(int columns, Color textColor){
+        JTextField textField = new JTextField(columns);
+        textField.setForeground(textColor);
+        textField.setBackground(darkColor);
+        return textField;
+    }
+
+    private JButton createStyledButton(String text, Color textColor){
+        JButton button = new JButton(text);
+        button.setForeground(textColor);
+        button.setBackground(darkColor);
+        return button;
+    }
+
+    private void styleComboBox(JComboBox<String> comboBox, Color textColor){
+        comboBox.setForeground(textColor);
+        comboBox.setBackground(darkColor);
+    }
+
+    private void styleTextArea(JTextArea textArea, Color textColor){
+        textArea.setForeground(textColor);
+        textArea.setBackground(darkColor);
+        textArea.setEditable(false);
     }
 
     private void loadDictionary(ActionEvent e){
