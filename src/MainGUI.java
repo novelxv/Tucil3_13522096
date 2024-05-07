@@ -10,7 +10,7 @@ public class MainGUI extends JFrame {
     private JComboBox<String> algorithmSelector;
     private JTextArea resultArea;
     private WordLadder wordLadder;
-    private JButton loadButton, solveButton;
+    private JButton loadButton, solveButton, backButton;
     private Color darkColor = new Color(34, 34, 34); 
     private Color neonCyan = new Color(0, 255, 255);
     private Color neonPink = new Color(255, 16, 240);
@@ -63,12 +63,22 @@ public class MainGUI extends JFrame {
         solverPanel.add(inputPanel, BorderLayout.NORTH);
         solverPanel.add(scrollPane, BorderLayout.CENTER);
 
+        // Back button
+        backButton = createStyledButton("Back", neonYellow);
+        backButton.addActionListener(this::backAction);
+        inputPanel.add(backButton);
+
         // Add panels to card layout
         cardPanel.add(lengthPanel, "Length");
         cardPanel.add(solverPanel, "Solver");
         cardLayout.show(cardPanel, "Length");
 
         // Initially disable input fields and solve button
+        toggleInputs(false);
+    }
+
+    private void backAction(ActionEvent e){
+        cardLayout.show(cardPanel, "Length");
         toggleInputs(false);
     }
 
